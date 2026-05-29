@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeQuest — Aprenda Programação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo">Code<span>Quest</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Início</a>
+      <a href="pages/jogo.html">Jogar</a>
+      <a href="pages/sobre.html">Sobre</a>
+    </div>
+  </nav>
+
+  <main class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🎓 Para escolas · Ensino Fundamental II</div>
+      <h1>Aprenda a <span class="highlight">pensar</span> como um programador</h1>
+      <p class="hero-sub">Monte sequências de comandos, guie o robô e descubra como a lógica de programação funciona — sem precisar digitar uma linha de código.</p>
+      <div class="hero-btns">
+        <a href="pages/jogo.html" class="btn-primary">▶ Começar a jogar</a>
+        <a href="pages/sobre.html" class="btn-secondary">Saiba mais</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="robot-card">
+        <div class="robot-emoji">🤖</div>
+        <div class="robot-path">
+          <div class="path-cell visited"></div>
+          <div class="path-cell visited"></div>
+          <div class="path-cell current">🤖</div>
+          <div class="path-cell"></div>
+          <div class="path-cell goal">⭐</div>
+        </div>
+        <div class="robot-blocks">
+          <span class="mini-block up">⬆ Cima</span>
+          <span class="mini-block right">➡ Direita</span>
+          <span class="mini-block repeat">🔁 2×</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="features">
+    <h2>O que você vai aprender</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Sequências</h3>
+        <p>Entenda que um programa é uma lista de instruções executadas em ordem.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔁</div>
+        <h3>Repetição</h3>
+        <p>Use loops para repetir ações sem precisar escrever o mesmo comando várias vezes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🐛</div>
+        <h3>Depuração</h3>
+        <p>Encontre e corrija erros no seu programa — uma habilidade essencial de todo programador.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Pensamento lógico</h3>
+        <p>Desenvolva raciocínio estruturado para resolver problemas passo a passo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Pronto para o desafio?</h2>
+    <p>5 fases · Dificuldade progressiva · Sem instalação</p>
+    <a href="pages/jogo.html" class="btn-primary">Jogar agora →</a>
+  </section>
+
+  <footer>
+    <p>CodeQuest · Projeto educacional para aulas de informática</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

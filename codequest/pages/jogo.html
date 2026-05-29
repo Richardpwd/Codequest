@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeQuest — Jogar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/melhorias.css" />
+</head>
+<body>
+
+  <!-- ── Boas-vindas ─────────────────────────────────────── -->
+  <div class="bv-overlay" id="bv-overlay">
+    <div class="bv-modal">
+      <div class="bv-emoji">🤖</div>
+      <h2>Bem-vindo ao CodeQuest!</h2>
+      <p>Guie o robô até a estrela montando sequências de comandos. Sem digitar código!</p>
+      <input type="text" id="bv-input" placeholder="Digite seu nome para começar" maxlength="30" autocomplete="off" />
+      <button class="btn-primary" id="bv-btn">Vamos lá! →</button>
+    </div>
+  </div>
+
+  <!-- ── Tutorial ────────────────────────────────────────── -->
+  <div class="tutorial-overlay" id="tutorial-overlay">
+    <div class="tutorial-modal">
+      <h2>📖 Como jogar</h2>
+      <div class="tutorial-steps">
+        <div class="t-step">
+          <div class="t-num">1</div>
+          <p>Clique nos <strong>blocos de comando</strong> à direita para adicioná-los à sua sequência.</p>
+        </div>
+        <div class="t-step">
+          <div class="t-num">2</div>
+          <p>Monte a <strong>sequência de passos</strong> que o robô 🤖 deve seguir para chegar à estrela ⭐.</p>
+        </div>
+        <div class="t-step">
+          <div class="t-num">3</div>
+          <p>Clique em <strong>▶ Executar</strong> para ver o robô seguir seus comandos.</p>
+        </div>
+        <div class="t-step">
+          <div class="t-num">4</div>
+          <p>Se errar, use <strong>↺ Resetar</strong> para tentar novamente. Use <strong>🔁 Repetir</strong> para loops!</p>
+        </div>
+      </div>
+      <button class="btn-primary" id="btn-fechar-tutorial" style="width:100%;text-align:center;">Entendi, vamos jogar!</button>
+    </div>
+  </div>
+
+  <!-- ── Relatório do professor ───────────────────────────── -->
+  <div class="rel-overlay" id="rel-overlay">
+    <div class="rel-modal">
+      <h2>
+        📊 Relatório da turma
+        <button class="rel-fechar" id="rel-fechar" aria-label="Fechar">✕</button>
+      </h2>
+
+      <!-- Senha -->
+      <div id="rel-senha-wrap">
+        <p style="font-size:.85rem;color:var(--texto-muted);margin-bottom:.8rem;">Área exclusiva para o professor. Digite a senha para acessar.</p>
+        <div class="senha-wrap">
+          <input type="password" id="rel-senha-input" placeholder="Senha do professor" />
+          <button id="rel-senha-ok">Entrar</button>
+        </div>
+        <div class="senha-erro" id="rel-senha-erro"></div>
+      </div>
+
+      <!-- Conteúdo -->
+      <div id="rel-conteudo" style="display:none">
+        <div class="rel-resumo" id="rel-resumo">Carregando...</div>
+        <table class="rel-table">
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Fases</th>
+              <th>Pontos</th>
+              <th>Tempo</th>
+              <th>Horário</th>
+            </tr>
+          </thead>
+          <tbody id="rel-tbody"></tbody>
+        </table>
+        <button class="rel-limpar" id="rel-limpar">🗑 Limpar registros</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-logo">Code<span>Quest</span></div>
+    <div class="nav-links">
+      <a href="../index.html">Início</a>
+      <a href="jogo.html" class="active">Jogar</a>
+      <a href="sobre.html">Sobre</a>
+      <span class="bv-nome-exibir" id="bv-nome-exibir"></span>
+    </div>
+  </nav>
+
+  <!-- ── Layout do jogo ───────────────────────────────────── -->
+  <div class="jogo-layout">
+
+    <div class="jogo-header">
+      <div>
+        <div class="jogo-titulo" id="fase-nome">Fase 1 — Caminho direto</div>
+        <div style="font-size:.85rem;color:var(--texto-muted);margin-top:4px;" id="fase-dica">
+          Leve o robô até a estrela. Sem obstáculos — foco na sequência!
+        </div>
+      </div>
+      <div class="fase-info">
+        <div class="pontos-badge" id="pontos">⭐ 0 pts</div>
+      </div>
+    </div>
+
+    <div class="fases-selector" id="fases-selector">
+      <button class="fase-btn ativa" title="Fase 1">1</button>
+      <button class="fase-btn" title="Fase 2">2</button>
+      <button class="fase-btn" title="Fase 3">3</button>
+      <button class="fase-btn" title="Fase 4">4</button>
+      <button class="fase-btn" title="Fase 5">5</button>
+    </div>
+
+    <div class="jogo-grid-wrap">
+      <div>
+        <div class="mapa-panel">
+          <div class="panel-label">Mapa — leve o robô 🤖 até a estrela ⭐</div>
+          <div id="game-grid"></div>
+        </div>
+        <div class="controles">
+          <button class="btn-primary" id="run-btn">▶ Executar</button>
+          <button class="btn-secondary" id="reset-btn">↺ Resetar</button>
+          <span id="msg"></span>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="blocos-panel">
+          <div class="panel-label">Blocos de comando</div>
+          <div class="block-list">
+            <button class="block-btn up"    data-tipo="up">⬆ Mover para cima</button>
+            <button class="block-btn down"  data-tipo="down">⬇ Mover para baixo</button>
+            <button class="block-btn left"  data-tipo="left">⬅ Mover para esquerda</button>
+            <button class="block-btn right" data-tipo="right">➡ Mover para direita</button>
+            <button class="block-btn repeat" id="btn-repeat">🔁 Repetir N vezes</button>
+          </div>
+        </div>
+        <div class="seq-panel">
+          <div class="panel-label">Sequência de comandos</div>
+          <div class="seq-list" id="seq-list">
+            <div class="seq-empty">Adicione blocos para começar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Modal Repetir ───────────────────────────────────── -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h3>🔁 Configurar repetição</h3>
+      <label for="repeat-count">Quantas vezes?</label>
+      <input type="number" id="repeat-count" min="1" max="10" value="2" />
+      <label for="repeat-block">Qual bloco repetir?</label>
+      <select id="repeat-block">
+        <option value="up">⬆ Mover para cima</option>
+        <option value="down">⬇ Mover para baixo</option>
+        <option value="left">⬅ Mover para esquerda</option>
+        <option value="right">➡ Mover para direita</option>
+      </select>
+      <div class="modal-btns">
+        <button class="btn-confirmar" id="btn-confirmar-repeat">Adicionar</button>
+        <button class="btn-cancelar"  id="btn-cancelar-repeat">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão flutuante do professor -->
+  <button class="rel-btn" id="rel-btn">👩‍🏫 Professor</button>
+
+  <script src="../js/game.js"></script>
+  <script src="../js/melhorias.js"></script>
+</body>
+</html>
